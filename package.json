@@ -6,13 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:generate" : "npx drizzle-kit-generate",
+    "db:migrate" : "npx drizzle-kit-migrate",
+    "db:studio" : "npx drizzle-kit studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@imagekit/next": "^2.1.5",
+    "@neondatabase/serverless": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "imagekit": "^6.0.0",
     "lucide-react": "^1.8.0",
     "next": "16.2.4",
@@ -32,6 +38,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
