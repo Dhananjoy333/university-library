@@ -52,7 +52,7 @@ export const { POST } = serve<InitialData>(async (context) => {
 
     await context.sleep("wait-for-3-days", 60 * 60 * 24 * 3);
 
-    while (true) {
+    while(true) {
         const state = await context.run("check-user-state", async () => {
             return await getUserState(email);
         });
