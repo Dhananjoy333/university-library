@@ -21,6 +21,7 @@ import FileUpload from "@/components/FileUpload";
 import ColorPicker from "@/components/admin/ColorPicker";
 import { createBook } from "@/lib/admin/actions/book";
 import { toast } from "@/hooks/use-toast";
+import {value} from "./palette_select.css";
 
 interface Props extends Partial<Book> {
     type?: "create" | "update";
@@ -29,7 +30,7 @@ interface Props extends Partial<Book> {
 const BookForm = ({ type, ...book }: Props) => {
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof bookSchema>>({
+    const form = useForm({
         resolver: zodResolver(bookSchema),
         defaultValues: {
             title: "",
@@ -46,6 +47,7 @@ const BookForm = ({ type, ...book }: Props) => {
     });
 
     const onSubmit = async (values: z.infer<typeof bookSchema>) => {
+       console.log("Form submitted Data : ", values);
         // const result = await createBook(values);
         //
         // if (result.success) {
@@ -143,6 +145,7 @@ const BookForm = ({ type, ...book }: Props) => {
                                     max={5}
                                     placeholder="Book rating"
                                     {...field}
+                                    value={field.value as number}
                                     className="book-form_input"
                                 />
                             </FormControl>
@@ -166,6 +169,7 @@ const BookForm = ({ type, ...book }: Props) => {
                                     max={10000}
                                     placeholder="Total copies"
                                     {...field}
+                                    value={field.value as number}
                                     className="book-form_input"
                                 />
                             </FormControl>
@@ -206,10 +210,10 @@ const BookForm = ({ type, ...book }: Props) => {
                                 Primary Color
                             </FormLabel>
                             <FormControl>
-                                {/*<ColorPicker*/}
-                                {/*    onPickerChange={field.onChange}*/}
-                                {/*    value={field.value}*/}
-                                {/*/>*/}
+                                <ColorPicker
+                                    onPickerChange={field.onChange}
+                                    value={field.value}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
