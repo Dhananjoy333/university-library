@@ -210,13 +210,13 @@ const FileUpload = ({
         (type === "image" ? (
           <Image
             alt={file.filePath}
-            src={file.filePath} // <-- 'path' changed to 'src' in the latest SDK version
+            src={file.filePath}
             width={500}
             height={300}
           />
         ) : type === "video" ? (
           <Video
-            src={file.filePath} // <-- 'path' changed to 'src' here as well
+            src={file.filePath} 
             controls={true}
             className="h-96 w-full rounded-xl"
           />

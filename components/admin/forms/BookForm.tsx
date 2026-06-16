@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import FileUpload from "@/components/FileUpload";
 import ColorPicker from "@/components/admin/ColorPicker";
 import { createBook } from "@/lib/admin/actions/book";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 interface Props extends Partial<Book> {
     type?: "create" | "update";
@@ -29,7 +29,7 @@ interface Props extends Partial<Book> {
 const BookForm = ({ type, ...book }: Props) => {
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof bookSchema>>({
+    const form = useForm({
         resolver: zodResolver(bookSchema),
         defaultValues: {
             title: "",
@@ -46,22 +46,15 @@ const BookForm = ({ type, ...book }: Props) => {
     });
 
     const onSubmit = async (values: z.infer<typeof bookSchema>) => {
-        // const result = await createBook(values);
-        //
-        // if (result.success) {
-        //     toast({
-        //         title: "Success",
-        //         description: "Book created successfully",
-        //     });
-        //
-        //     router.push(`/admin/books/${result.data.id}`);
-        // } else {
-        //     toast({
-        //         title: "Error",
-        //         description: result.message,
-        //         variant: "destructive",
-        //     });
-        // }
+        const result = await createBook(values);
+
+        if (result.success) {
+            toast.success("Book created successfully");
+
+            router.push(`/admin/books/${result.data.id}`);
+        } else {
+            toast.error(result.message || "Failed to create book");
+        }
     };
 
     return (
@@ -143,6 +136,7 @@ const BookForm = ({ type, ...book }: Props) => {
                                     max={5}
                                     placeholder="Book rating"
                                     {...field}
+                                    value={field.value as number}
                                     className="book-form_input"
                                 />
                             </FormControl>
@@ -166,6 +160,7 @@ const BookForm = ({ type, ...book }: Props) => {
                                     max={10000}
                                     placeholder="Total copies"
                                     {...field}
+                                    value={field.value as number}
                                     className="book-form_input"
                                 />
                             </FormControl>
@@ -183,15 +178,15 @@ const BookForm = ({ type, ...book }: Props) => {
                                 Book Image
                             </FormLabel>
                             <FormControl>
-                                {/*<FileUpload*/}
-                                {/*    type="image"*/}
-                                {/*    accept="image/*"*/}
-                                {/*    placeholder="Upload a book cover"*/}
-                                {/*    folder="books/covers"*/}
-                                {/*    variant="light"*/}
-                                {/*    onFileChange={field.onChange}*/}
-                                {/*    value={field.value}*/}
-                                {/*/>*/}
+                                <FileUpload
+                                    type="image"
+                                    accept="image/*"
+                                    placeholder="Upload a book cover"
+                                    folder="books/covers"
+                                    variant="light"
+                                    onFileChange={field.onChange}
+                                    value={field.value}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -206,10 +201,10 @@ const BookForm = ({ type, ...book }: Props) => {
                                 Primary Color
                             </FormLabel>
                             <FormControl>
-                                {/*<ColorPicker*/}
-                                {/*    onPickerChange={field.onChange}*/}
-                                {/*    value={field.value}*/}
-                                {/*/>*/}
+                                <ColorPicker
+                                    onPickerChange={field.onChange}
+                                    value={field.value}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -246,15 +241,15 @@ const BookForm = ({ type, ...book }: Props) => {
                                 Book Trailer
                             </FormLabel>
                             <FormControl>
-                                {/*<FileUpload*/}
-                                {/*    type="video"*/}
-                                {/*    accept="video/*"*/}
-                                {/*    placeholder="Upload a book trailer"*/}
-                                {/*    folder="books/videos"*/}
-                                {/*    variant="light"*/}
-                                {/*    onFileChange={field.onChange}*/}
-                                {/*    value={field.value}*/}
-                                {/*/>*/}
+                                <FileUpload
+                                    type="video"
+                                    accept="video/*"
+                                    placeholder="Upload a book trailer"
+                                    folder="books/videos"
+                                    variant="light"
+                                    onFileChange={field.onChange}
+                                    value={field.value}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
