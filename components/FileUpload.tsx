@@ -129,17 +129,14 @@ const FileUpload = ({
       setFile({ filePath: uploadedPath });
       onFileChange(uploadedPath);
 
-      // ✅ Swapped to Sonner success format
       toast.success(`${type} uploaded successfully`, {
         description: `${uploadedPath} uploaded successfully!`,
       });
     } catch (error: unknown) {
-      // Handle Error safely without using 'any'
       console.error(error);
       const errorMessage =
         error instanceof Error ? error.message : "An unknown error occurred";
 
-      // ✅ Swapped to Sonner error format
       toast.error(`${type} upload failed`, {
         description:
           errorMessage ||
@@ -161,7 +158,7 @@ const FileUpload = ({
 
       <button
         className={cn(
-          "upload-btn flex h-14 w-full items-center justify-center gap-2 rounded-md bg-[#1e2230] px-4 text-white border border-transparent transition-all hover:bg-[#252a3b]",
+          "upload-btn cursor-pointer flex h-14 w-full items-center justify-center gap-2 rounded-md bg-[#1e2230] px-4 text-white border border-transparent transition-all hover:bg-[#252a3b]",
           styles.button,
         )}
         onClick={(e) => {
@@ -174,7 +171,7 @@ const FileUpload = ({
           alt="upload-icon"
           width={20}
           height={20}
-          className="object-contain inverted-icon-color" // Optional: ensures icon brightness matches target
+          className="object-contain inverted-icon-color"
         />
 
         <p

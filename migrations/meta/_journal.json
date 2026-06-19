@@ -15,6 +15,13 @@
       "when": 1781600977544,
       "tag": "0001_little_romulus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781847608684,
+      "tag": "0002_absent_bushwacker",
+      "breakpoints": true
     }
   ]
 }
